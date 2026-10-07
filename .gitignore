@@ -1,20 +1,20 @@
-﻿   # OS and editor files
-   .DS_Store
-   Thumbs.db
-   Desktop.ini
+# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
 
-   # Local environment files
-   .env
-   .env.*
+# Local environment files
+.env
+.env.*
 
-   # Logs and cache
-   *.log
-   npm-debug.log*
+# Logs and cache
+*.log
+npm-debug.log*
 
-   # Temporary files
-   *.tmp
-   *.swp
-   *~
+# Temporary files
+*.tmp
+*.swp
+*~
 
-   # Original images (keep locally, do not publish)
-   images/original/
+# Original images (keep locally, do not publish)
+images/original/
