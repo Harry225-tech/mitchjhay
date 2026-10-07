@@ -1,0 +1,1362 @@
+ :root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #ffffff;
+  --bg-alt: #f6f3ee;
+  --surface: #ffffff;
+  --surface-alt: #f6f3ee;
+  --surface-image: #e8e3db;
+  --surface-skeleton: #f3f3f3;
+  --surface-dark: #111111;
+  --surface-dark-alt: #1a1a1a;
+  --panel-accent: #F5C518;
+  --field: #ffffff;
+  --field-inset: #ffffff;
+  --always-dark: #111111;
+
+  /* Text */
+  --text: #111111;
+  --text-on-dark: #ffffff;
+  --text-on-dark-soft: #dadada;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.8);
+  --text-on-dark-nav: #d6d6d6;
+  --text-on-dark-label: #d7d7d7;
+  --text-on-dark-form-label: #ededed;
+  --text-on-dark-footnote: #dedede;
+  --text-on-dark-chip: #f2f2f2;
+  --on-gold: #111111;
+  /* Text on the gold accent panels (.booking-section, .sale-enquiry-section) */
+  --accent-panel-ink: #111111;
+  --muted: #5f5f5f;
+
+  /* Lines and borders */
+  --line: #e5dfd0;
+  --line-strong: #5f5f5f;
+  --line-chip: #444444;
+  --line-on-dark: rgba(255, 255, 255, 0.15);
+  --line-on-dark-soft: rgba(255, 255, 255, 0.08);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.12);
+
+  /* Focus ring: >=3:1 against every background in its theme */
+  --focus-ring: #8a6500;
+
+  /* Gold */
+  --gold: #F5C518;
+  --gold-deep: #d9af12;
+  --gold-text: #8a6500;
+  --gold-hover: #ffd74f;
+  --gold-soft: rgba(245, 197, 24, 0.08);
+  --gold-soft-strong: rgba(245, 197, 24, 0.4);
+
+  /* Feedback on dark panels */
+  --estimate-on-dark: #fff1b6;
+  --error-on-dark: #ffd0cb;
+  --success-on-dark: #d5ffdf;
+
+  /* Sale listing status */
+  --status-available: #176b3a;
+  --status-reserved: #815b00;
+  --status-sold: #6b2525;
+
+  /* Brand and overlays */
+  --faint-on-dark: rgba(255, 255, 255, 0.02);
+  /* Shadow for hero text over the photo (shared by both themes) */
+  --hero-text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  --whatsapp: #25D366;
+  --whatsapp-text: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.2);
+  --backdrop: rgba(0, 0, 0, 0.72);
+  --hero-scrim: linear-gradient(90deg, rgba(17, 17, 17, 0.82) 0%, rgba(17, 17, 17, 0.70) 35%, rgba(17, 17, 17, 0.25) 70%, rgba(17, 17, 17, 0.10) 100%);
+  --hero-scrim-mobile: linear-gradient(180deg, rgba(17, 17, 17, 0.55) 0%, rgba(17, 17, 17, 0.70) 60%, rgba(17, 17, 17, 0.85) 100%);
+
+  /*
+   * Hero photo: defined ONCE, here.
+   *
+   * Leave it as `none` and every hero on the site is a flat #111111 panel with the brand
+   * logo and the CSS gold accent. To use a photo, save it as images/hero.webp
+   * (1600x900, WebP, under 200 KB, calm empty space on the left behind the headline)
+   * and change these two lines together:
+   *
+   *   --hero-photo: url("../images/hero.webp");
+   *   --hero-media-display: grid;
+   *
+   * The light overlay (--hero-scrim on desktop, --hero-scrim-mobile under 720px) is listed
+   * in front of the photo, so it only darkens a photo. With no photo that overlay is an
+   * exact no-op: it is the same black as --always-dark, so the panel stays flat #111111.
+   */
+       --hero-photo: url("../images/hero.webp");
+  /*
+   * Companion state for --hero-photo: the `display` value of the hero logo panel.
+   * `grid` shows the logo (right of the copy on wide screens, above it on narrow ones);
+   * `none` removes it, because a photo already carries the image. This is the switch that
+   * works in every browser, including those without container style queries, so it is set
+   * alongside --hero-photo rather than derived from it.
+   */
+ --hero-media-display: none;
+  /*
+   * Rendered size of the hero logo, shared by the logo and the diamond behind it.
+   * images/logo.png is 160x160, so this is capped at 160px. Raise this and the width/height
+   * attributes in the markup together when a larger logo source is added.
+   */
+  --hero-logo-size: 160px;
+  /*
+   * The faint gold diamond behind the logo is a square rotated 45deg, so it reaches
+   * 1.41421 x its own side from centre to corner. --hero-diamond-over is how far its corners
+   * sit past the edge of the logo; the two derived values size the shape and reserve exactly
+   * the room it needs, so .hero-media can pad itself and the shape stays whole on every page
+   * and at every width instead of being clipped by the panel edge.
+   */
+  --hero-diamond-over: 54px;
+  --hero-diamond-reach: calc(var(--hero-logo-size) / 2 + var(--hero-diamond-over));
+  --hero-diamond-size: calc(var(--hero-diamond-reach) * 1.41421);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #111111;
+  --bg-alt: #111111;
+  --surface: #1a1a1a;
+  --surface-alt: #1a1a1a;
+  --surface-image: #1a1a1a;
+  --surface-skeleton: #1a1a1a;
+  --surface-dark: #1a1a1a;
+  --surface-dark-alt: #111111;
+  --panel-accent: #111111;
+  --field: #1a1a1a;
+  --field-inset: #111111;
+  --always-dark: #111111;
+
+  /* Text */
+  --text: #ffffff;
+  --text-on-dark: #ffffff;
+  --text-on-dark-soft: #dadada;
+  --text-on-dark-muted: rgba(255, 255, 255, 0.8);
+  --text-on-dark-nav: #d6d6d6;
+  --text-on-dark-label: #d7d7d7;
+  --text-on-dark-form-label: #ededed;
+  --text-on-dark-footnote: #dedede;
+  --text-on-dark-chip: #f2f2f2;
+  --on-gold: #111111;
+  --accent-panel-ink: #F5C518;
+  --muted: #d6d6d6;
+
+  /* Lines and borders */
+  --line: rgba(255, 255, 255, 0.4);
+  --line-strong: rgba(255, 255, 255, 0.4);
+  --line-chip: #d6d6d6;
+  --line-on-dark: rgba(255, 255, 255, 0.15);
+  --line-on-dark-soft: rgba(255, 255, 255, 0.08);
+  --line-on-dark-strong: rgba(255, 255, 255, 0.12);
+
+  --focus-ring: #F5C518;
+
+  /* Gold */
+  --gold: #F5C518;
+  --gold-deep: #d9af12;
+  --gold-text: #F5C518;
+  --gold-hover: #ffd74f;
+  --gold-soft: rgba(245, 197, 24, 0.08);
+  --gold-soft-strong: rgba(245, 197, 24, 0.4);
+
+  /* Feedback on dark panels */
+  --estimate-on-dark: #fff1b6;
+  --error-on-dark: #ffd0cb;
+  --success-on-dark: #d5ffdf;
+
+  /* Sale listing status */
+  --status-available: #7bd88f;
+  --status-reserved: #f0c04a;
+  --status-sold: #ff9e9e;
+
+  /* Brand and overlays */
+  --faint-on-dark: rgba(255, 255, 255, 0.02);
+  --whatsapp: #25D366;
+  --whatsapp-text: #ffffff;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --backdrop: rgba(0, 0, 0, 0.8);
+}
+
+* { box-sizing: border-box; }
+html { font-size: 16px; }
+body {
+  margin: 0;
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+button, input, select, textarea { font: inherit; }
+h1, h2, h3, .brand-main, .brand-sub {
+  font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+h1, h2, h3, p { margin-top: 0; }
+p { margin-bottom: 0; }
+img[loading="lazy"] { background: var(--surface-skeleton); }
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+.wrap { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
+.site-header .wrap { width: 100%; margin: 0; max-width: none; }
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.hero-bg .eyebrow { color: var(--gold); }
+/* Text on the gold accent panels (booking, sale enquiry) stays AA in both themes. */
+.booking-section .eyebrow, .sale-enquiry-section .eyebrow { color: var(--accent-panel-ink); }
+.booking-section .lead { color: var(--text); }
+.section-heading { margin-bottom: 2rem; }
+.section-heading h2 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  color: var(--text);
+  margin-bottom: 0;
+}
+.lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 58ch;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.8rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid var(--gold);
+  background: var(--gold);
+  color: var(--on-gold);
+  white-space: nowrap;
+}
+.btn:hover, .btn:focus-visible { background: var(--gold-hover); }
+.btn-secondary { background: transparent; color: var(--gold); }
+.btn-secondary:hover, .btn-secondary:focus-visible { background: var(--gold-soft); }
+.btn-secondary.dark { color: var(--text); border-color: var(--text); }
+/* Top information bar. js/site.js removes it entirely while SITE.hours is empty, so an
+   unconfirmed opening-hours line is never shown. */
+.info-bar {
+  background: var(--surface-dark);
+  color: var(--text-on-dark-muted);
+  border-bottom: 1px solid var(--line-on-dark-soft);
+}
+.info-bar-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 1.25rem;
+  min-height: 40px;
+  padding: 0.5rem 0;
+  font-size: 0.9rem;
+}
+.info-bar-inner p { margin: 0; }
+.info-bar-label {
+  display: inline-block;
+  margin-right: 0.4rem;
+  color: var(--gold);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  background: var(--surface-dark);
+  border-bottom: 1px solid var(--line-on-dark);
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+.brand {
+  text-decoration: none;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.brand-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: contain;
+  background: var(--gold);
+}
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+.brand-main {
+  font-size: clamp(1.3rem, 1.1rem + 0.7vw, 1.7rem);
+  font-weight: 700;
+  color: var(--text-on-dark);
+  display: block;
+  white-space: nowrap;
+}
+.brand-sub {
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: block;
+  white-space: nowrap;
+}
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  color: var(--text-on-dark-soft);
+}
+.main-nav a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.2rem 0;
+  color: inherit;
+}
+/*
+ * Header fit. Between 721px and roughly 1000px the brand, the navigation, the Book now
+ * button and the two icon buttons do not fit on one line. Tighten the navigation gap, and
+ * drop the Book now button while there is no room for it: the same booking is one tap away
+ * from the hero and from the mobile bar. Both rules switch off again on wide screens.
+ */
+@media (max-width: 1100px) {
+  .main-nav { gap: 1rem; }
+}
+@media (max-width: 1000px) {
+  .header-cta { display: none; }
+}
+/*
+ * Every hero panel (index.html .hero, the buy.html sales hero and the legal page headers).
+ * The photo comes from --hero-photo at the top of this file; with no photo this is a flat
+ * #111111 panel. The overlay sits in front of the photo and is invisible on the flat panel.
+ *
+ * The panel is also the `hero` query container, so the layout can react to --hero-photo in
+ * CSS alone, with no second class in the markup and nothing for the scripts to keep in sync.
+ */
+.hero-bg {
+  position: relative;
+  overflow: hidden;
+  container-type: inline-size;
+  container-name: hero;
+  background-color: var(--always-dark);
+  background-image: var(--hero-scrim), var(--hero-photo);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: var(--text-on-dark);
+}
+/* Keeps the copy above the logo panel. */
+.hero-bg > .wrap { position: relative; z-index: 1; }
+
+/*
+ * The hero layout, shared by all seven hero panels.
+ *
+ * Default (narrow): one column, the logo above the headline.
+ * 900px and up: two columns, the copy on the left and the logo on the right.
+ *
+ * The markup puts .hero-media before .hero-copy, so the narrow layout needs no reordering
+ * and the two-column rule below swaps them by name.
+ */
+.hero { position: relative; }
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "media" "copy";
+  column-gap: 2.25rem;
+  row-gap: 1rem;
+  align-items: center;
+  padding: 2.5rem 0 3rem;
+}
+.hero-copy { grid-area: copy; max-width: 620px; }
+
+/* The logo panel. Hidden while --hero-media-display is `none`, which is how the photo on.
+   The vertical padding is the diamond's overhang, so this box is as tall as the shape. */
+.hero-media {
+  position: relative;
+  display: var(--hero-media-display);
+  place-items: center;
+  grid-area: media;
+  padding: calc(var(--hero-diamond-over) + 2px) 0;
+}
+.hero-logo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: var(--hero-logo-size);
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid var(--gold);
+  object-fit: contain;
+}
+/* The gold accent: one CSS-only outlined diamond parked behind the logo. */
+.hero-media::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  width: var(--hero-diamond-size);
+  height: var(--hero-diamond-size);
+  border: 2px solid var(--gold-soft-strong);
+  transform: translate(-50%, -50%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* 900px and up: copy left, logo right. */
+@media (min-width: 900px) {
+  .hero-inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-areas: "copy media";
+    column-gap: clamp(2.5rem, 6vw, 5rem);
+    padding: 3.5rem 0 4.5rem;
+  }
+}
+/*
+ * With no photo the logo panel is always on, whatever the companion variable says, so a
+ * leftover `none` can never leave a flat hero without its brand mark.
+ */
+@container hero style(--hero-photo: none) {
+  .hero-media { display: grid; }
+}
+/* No container queries at all: the companion variable is the only switch available. */
+@supports not (container-type: inline-size) {
+  .hero-media { display: var(--hero-media-display, grid); }
+}
+.hero h1 {
+  font-size: clamp(3.5rem, 12vw, 8.5rem);
+  margin-bottom: 1rem;
+  color: var(--text-on-dark);
+}
+.hero h1 span { color: var(--gold); }
+.lead-hero {
+  color: var(--text-on-dark-muted);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+}
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+.trust-strip {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+.trust-strip li {
+  border: 1px solid var(--gold-soft-strong);
+  border-radius: 999px;
+  padding: 0.5rem 0.85rem;
+  background: var(--faint-on-dark);
+  color: var(--text-on-dark-chip);
+  font-size: 0.92rem;
+}
+.how-it-works, .fleet-section, .booking-section, .services-section, .requirements-section, .faq-section, .reviews-section, .contact-section { padding: 5rem 0; }
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+.step-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.5rem;
+}
+.step-card .step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  min-height: 54px;
+  border-radius: 50%;
+  background: var(--gold);
+  color: var(--on-gold);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.step-card h3 { font-size: clamp(1.6rem, 3vw, 2.1rem); margin-bottom: 0.6rem; }
+.fleet-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.fleet-tools[hidden] { display: none; }
+.filters { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.chip {
+  min-height: 44px;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line-chip);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 700;
+}
+.chip.is-active { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.fleet-search-sort { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.search-box, .sort-box { display: block; }
+.search-box input, .sort-box select, .booking-form input, .booking-form select, .booking-form textarea {
+  min-height: 48px;
+  width: 100%;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: var(--field);
+  padding: 0.8rem 0.9rem;
+  color: var(--text);
+}
+.booking-form textarea { min-height: 110px; }
+.booking-form input, .booking-form select, .booking-form textarea { background: var(--field-inset); }
+.fleet-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 1.1rem;
+}
+@media (min-width: 700px) {
+  .fleet-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .fleet-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.car-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+.car-image {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-image);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+.car-image svg {
+  width: 104px;
+  height: 52px;
+  color: var(--gold);
+}
+.car-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1rem 1.2rem;
+  flex: 1;
+}
+.car-title {
+  font-size: 1.7rem;
+  line-height: 1.05;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.car-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.93rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.car-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.4rem;
+  margin: 0;
+  margin-top: auto;
+  color: var(--muted);
+}
+.car-price strong {
+  color: var(--text);
+  font-size: 2rem;
+  line-height: 1.1;
+  font-family: 'Big Shoulders Display', sans-serif;
+}
+.car-price-note { font-size: 0.85rem; color: var(--muted); }
+.reserve-btn { width: 100%; }
+.small-note {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.photo-preview-section { margin-top: 2.5rem; }
+.photo-preview-section .section-heading { max-width: 720px; }
+.photo-preview-section .section-heading > p:last-child { color: var(--muted); }
+.photo-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.photo-preview-card {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-alt);
+}
+.photo-preview-card img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.photo-preview-card figcaption {
+  padding: 0.8rem 1rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+/* "About us" section on index.html. js/site.js fills it from SITE.about and removes the
+   whole section (and its nav link) while SITE.about is empty. */
+.about-section { padding: 5rem 0; background: var(--bg-alt); }
+.about-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 2rem;
+  align-items: center;
+}
+.about-text p { margin-bottom: 1rem; color: var(--muted); max-width: 62ch; }
+.about-text p:last-child { margin-bottom: 0; }
+.about-photo {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface-image);
+}
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+@media (max-width: 860px) {
+  .about-wrap { grid-template-columns: 1fr; }
+}
+.booking-section { background: var(--panel-accent); }
+.booking-wrap {
+  display: grid;
+  grid-template-columns: 0.95fr 1.2fr;
+  gap: 2rem;
+  align-items: start;
+}
+.booking-intro { color: var(--text); }
+.booking-heading h2, .booking-callout, .booking-note { color: var(--text); }
+.booking-callout { margin-top: 1rem; font-weight: 700; }
+.booking-callout a { text-decoration: underline; }
+.booking-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 18px;
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+}
+.booking-form label {
+  display: grid;
+  gap: 0.45rem;
+  color: var(--text-on-dark-label);
+  font-size: 0.95rem;
+}
+.form-full { grid-column: 1 / -1; }
+.field-hint { font-size: 0.9rem; }
+.checkbox-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 12px;
+  background: var(--surface-dark-alt);
+  padding: 0.8rem 0.9rem;
+}
+.checkbox-wrap input {
+  width: 18px;
+  height: 18px;
+  margin-top: 0.2rem;
+}
+.checkbox-wrap a { color: var(--gold); }
+.honeypot-wrap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.estimate, .form-error, .form-success {
+  min-height: 24px;
+  margin: 0;
+  font-size: 0.95rem;
+}
+.estimate { color: var(--estimate-on-dark); }
+.form-error { color: var(--error-on-dark); }
+.form-success { color: var(--success-on-dark); }
+.button-row { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+.fallback-block { min-height: 24px; }
+#fallbackLink { color: var(--gold); }
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.service-grid article {
+  border-left: 4px solid var(--gold);
+  padding: 0.3rem 0 0.3rem 1rem;
+}
+.service-grid h3 { font-size: clamp(1.4rem, 2vw, 1.9rem); margin-bottom: 0.5rem; }
+.requirements-wrap { max-width: 840px; }
+.requirement-list {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+  display: grid;
+  gap: 0.8rem;
+}
+.requirement-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--text);
+}
+.requirement-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold-text);
+  font-weight: 700;
+}
+.faq-list { display: grid; gap: 0.75rem; }
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  background: var(--surface-alt);
+}
+.faq-list summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--text);
+}
+.faq-list p {
+  margin-top: 0.8rem;
+  color: var(--muted);
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.review-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 1.2rem;
+}
+.review-card .stars {
+  color: var(--gold-text);
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+.review-card p { color: var(--text); }
+.review-card footer {
+  margin-top: 0.8rem;
+  font-weight: 700;
+  color: var(--gold-text);
+}
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+  color: var(--muted);
+}
+.contact-list li { display: grid; gap: 0.3rem; }
+.label {
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+}
+.contact-list a { color: var(--text); text-decoration: underline; }
+.or { font-size: 0.85rem; color: var(--muted); }
+/* Small second line under the opening hours, filled from SITE.hoursNote. */
+.contact-note { font-size: 0.9rem; color: var(--muted); }
+/* Short "Payment methods" line, filled from SITE.payments. */
+.payments-line { margin: 0; }
+.map-panel { display: grid; gap: 1rem; }
+.map-embed {
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--surface-alt);
+}
+.map-embed iframe {
+  display: block;
+  width: 100%;
+  min-height: 300px;
+  border: 0;
+}
+.site-footer {
+  background: var(--surface-dark);
+  color: var(--text-on-dark-soft);
+  border-top: 1px solid var(--line-on-dark-soft);
+  padding: 1.6rem 0 3.25rem;
+}
+.footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-brand, .footer-tagline { margin: 0; color: var(--text-on-dark); }
+.footer-brand {
+  font-family: 'Big Shoulders Display', sans-serif;
+  font-size: 1.8rem;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.footer-links a, .footer-address a { color: var(--text-on-dark); text-decoration: underline; }
+/* Opening hours and social icons in the footer. Both parts are removed by js/site.js while
+   SITE.hours and the SITE.social URLs are empty. */
+.footer-hours { color: var(--text-on-dark); }
+.footer-hours-note, .footer-hours-label { color: var(--text-on-dark-muted); }
+.footer-social { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.footer-social a {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 50%;
+  color: var(--text-on-dark);
+}
+.footer-social a:hover, .footer-social a:focus-visible { border-color: var(--gold); color: var(--gold); }
+.footer-social svg { width: 24px; height: 24px; fill: currentColor; }
+.floating-whatsapp {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--whatsapp-text);
+  background: var(--whatsapp);
+  color: var(--whatsapp-text);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 8px 24px var(--shadow);
+  z-index: 30;
+  text-decoration: none;
+}
+.floating-whatsapp svg { width: 32px; height: 32px; }
+.mobile-bar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 25;
+  display: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--surface-dark);
+  border-top: 1px solid var(--line-on-dark-strong);
+}
+.mobile-bar a, .mobile-bar button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  color: var(--text-on-dark);
+  text-decoration: none;
+  font-weight: 700;
+}
+.mobile-bar > *:not(:last-child) { border-right: 1px solid var(--line-on-dark-strong); }
+/* Header band on the legal pages and on 404.html. Same hero panel as the home page. */
+.legal-hero .hero-inner { padding: 3rem 0 3.25rem; }
+.legal-hero h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  color: var(--text-on-dark);
+  margin: 0;
+  max-width: 22ch;
+}
+.legal-main { padding: 3.5rem 0 5rem; background: var(--bg-alt); }
+.legal-wrap { max-width: 840px; }
+.legal-content { display: grid; gap: 1rem; color: var(--text); }
+.legal-content h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); margin-top: 1rem; }
+.legal-content ul { margin: 0; padding-left: 1.3rem; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+.sales-teaser {
+  padding: 2.5rem 0;
+  background: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.sales-teaser-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.sales-teaser h2, .sales-hero h1 {
+  font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+  line-height: 0.98;
+  margin: 0;
+}
+.sales-teaser h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.65rem; }
+.sales-hero .hero-inner { padding: 4rem 0; }
+.sales-hero h1 {
+  max-width: 15ch;
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
+  margin-bottom: 1.25rem;
+}
+.sales-hero .lead { color: var(--text-on-dark-muted); }
+.sales-listings { padding: 4rem 0 3rem; }
+.sale-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 0.85rem;
+  padding: 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-alt);
+}
+.sale-filters label, .sale-enquiry-form > label {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.sale-filters input, .sale-filters select, .sale-enquiry-form input, .sale-enquiry-form textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--field-inset);
+  color: var(--text);
+}
+.sale-count { margin: 1.2rem 0; color: var(--muted); font-weight: 700; }
+.sale-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+  gap: 1rem;
+}
+@media (min-width: 700px) {
+  .sale-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  .sale-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.sale-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-alt);
+}
+.sale-card-photo {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-image);
+}
+.sale-card-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+.sale-silhouette {
+  display: flex;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1rem;
+  background: var(--surface-image);
+  color: var(--muted);
+  text-align: center;
+}
+.sale-silhouette svg { width: 120px; height: 52px; color: var(--gold-deep); }
+.sale-card-body { display: flex; flex: 1; flex-direction: column; gap: 0.5rem; padding: 1rem; }
+.sale-card-body h3 {
+  margin: 0;
+  font-size: 1.65rem;
+  line-height: 1.05;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.sale-status { margin: 0; font-weight: 700; }
+.sale-status-available { color: var(--status-available); }
+.sale-status-available::before { content: '✓ '; }
+.sale-status-reserved { color: var(--status-reserved); }
+.sale-status-sold { color: var(--status-sold); }
+.sale-status-ask-us { color: var(--muted); }
+.sale-card-price {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+.sale-card-price-note { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+.sale-detail-price { margin: 0; font-size: 1.3rem; font-weight: 700; }
+.sale-card-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+.sale-card-actions, .sale-detail-actions, .sale-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: auto;
+}
+.sale-card-actions .btn, .sale-detail-actions .btn, .sale-form-actions .btn {
+  white-space: normal;
+  text-align: center;
+}
+.sale-empty {
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface-alt);
+  text-align: center;
+}
+.sale-empty h3 { font-size: 1.7rem; }
+.sale-empty .btn { margin-top: 1rem; }
+.sales-payment-note { margin-top: 1.4rem; color: var(--muted); font-size: 0.93rem; }
+.sale-enquiry-section { padding: 4rem 0; background: var(--panel-accent); }
+.sale-enquiry-wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2rem; align-items: start; }
+.sale-enquiry-wrap h2 { font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1; }
+.sale-enquiry-form {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+  padding: 1.25rem;
+  border-radius: 16px;
+  background: var(--surface-dark);
+  color: var(--text-on-dark);
+}
+.sale-enquiry-form > label { color: var(--text-on-dark-form-label); }
+.sale-form-full { grid-column: 1 / -1; }
+.sale-enquiry-form textarea { min-height: 90px; }
+.sale-consent { grid-column: 1 / -1; }
+.sale-consent label { display: flex; align-items: flex-start; gap: 0.65rem; }
+.sale-consent input { width: 18px; min-height: 18px; margin-top: 0.2rem; }
+.sale-consent a, .sale-policy-link a { color: var(--text); }
+.sale-enquiry-form .sale-consent a { color: var(--gold); }
+.sale-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.sale-form-error, .sale-form-success { min-height: 1.4em; margin: 0; }
+.sale-form-error { color: var(--error-on-dark); }
+.sale-form-success { color: var(--success-on-dark); }
+.sale-form-footnote { margin: 0; color: var(--text-on-dark-footnote); font-size: 0.88rem; }
+.sale-dialog {
+  width: min(1000px, calc(100% - 1rem));
+  max-width: none;
+  max-height: min(92vh, 1000px);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--text);
+  background: var(--surface);
+  transition: none;
+  animation: none;
+}
+.sale-dialog::backdrop { background: var(--backdrop); }
+.sale-dialog-shell { padding: clamp(1rem, 3vw, 1.5rem); }
+.sale-dialog-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.sale-dialog-header h2 { margin: 0; font-size: clamp(1.8rem, 5vw, 3rem); }
+.dialog-close, .sale-gallery-controls button, .sale-thumbnail, .sale-photo-tabs button {
+  min-height: 44px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 0.55rem 0.8rem;
+  background: var(--surface-alt);
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sale-detail-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 1.25rem; }
+.sale-photo-tabs { display: flex; gap: 0.5rem; margin-bottom: 0.7rem; }
+.sale-photo-tabs button[aria-selected="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.sale-gallery-main {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 12px;
+  background: var(--always-dark);
+}
+.sale-gallery-main img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  background: var(--always-dark);
+}
+.sale-gallery-controls { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin: 0.7rem 0; }
+.sale-thumbnails { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.2rem; }
+.sale-thumbnail { flex: 0 0 90px; padding: 0; overflow: hidden; }
+.sale-thumbnail.is-selected { outline: 3px solid var(--gold-text); }
+.sale-thumbnail img { width: 100%; height: 58px; object-fit: cover; }
+.sale-detail-info { min-width: 0; }
+.sale-detail-price { margin: 0.7rem 0; }
+.sale-spec-table { width: 100%; border-collapse: collapse; margin: 0.8rem 0 1rem; }
+.sale-spec-table th, .sale-spec-table td { padding: 0.45rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+.sale-spec-table th { width: 40%; }
+.sale-feature-list { padding-left: 1.2rem; }
+.sale-dialog-form { margin-top: 1.3rem; }
+.sale-dialog-form h3 { grid-column: 1 / -1; margin: 0; font-size: 1.6rem; }
+@media (max-width: 860px) {
+  .booking-wrap, .contact-wrap, .sale-enquiry-wrap, .sale-detail-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 720px) {
+  .main-nav { display: none; }
+  .header-cta { display: none; }
+  /* Only the brand and the two icon buttons are left; tighten them to fit 360px. */
+  .header-row { min-height: 64px; padding: 0 0.85rem; }
+  .brand-sub { font-size: 0.72rem; letter-spacing: 0.12em; }
+  .hero-bg {
+    background-image: var(--hero-scrim-mobile), var(--hero-photo);
+  }
+  .sales-hero .hero-inner { padding: 2.5rem 0; }
+  .booking-form { grid-template-columns: 1fr; }
+  .floating-whatsapp { bottom: calc(52px + 1rem + env(safe-area-inset-bottom, 0px)); }
+  .mobile-bar { display: grid; }
+  .site-footer { padding-bottom: 5.6rem; }
+  .sales-teaser-row { align-items: flex-start; flex-direction: column; }
+  .sale-enquiry-form { grid-template-columns: 1fr; }
+  .sale-dialog { width: calc(100% - 0.5rem); max-height: 94vh; }
+  .sale-dialog-shell { padding: 0.75rem; }
+}
+
+.header-actions .theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-on-dark);
+  cursor: pointer;
+  transition: border-color;
+}
+.header-actions .theme-toggle:hover, .header-actions .theme-toggle:focus-visible {
+  border-color: #ffffff;
+  background: transparent;
+  color: inherit;
+}
+.theme-icon { display: block; width: 24px; height: 24px; fill: currentColor; }
+.theme-icon-sun { display: none; }
+:root[data-theme="dark"] .theme-icon-sun { display: block; }
+:root[data-theme="dark"] .theme-icon-moon { display: none; }
+.mobile-bar .theme-toggle {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.sprite { position: absolute; left: -9999px; width: 0; height: 0; pointer-events: none; }
+/* Hero text shadow only shows over a photo; on the flat black panel it is invisible. */
+.hero-bg h1, .hero-bg p { text-shadow: var(--hero-text-shadow); }
+
+/* Site-wide search. The bar matches the header, so it is always dark and looks the same in both
+   themes. It is shown and hidden with the `hidden` attribute: no animation, no transitions. */
+.header-actions { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+/* The search panel opens under the header and stays centred with the content column. */
+.car-search {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0.5rem auto 0;
+  border: 1px solid var(--line-on-dark-soft);
+  border-radius: 1.25rem;
+  background: var(--surface-dark);
+}
+.car-search-inner { padding: 1rem 0 1.2rem; }
+.car-search-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.car-search-label { display: block; font-weight: 700; color: var(--text-on-dark); }
+.car-search-close {
+  min-height: 48px;
+  padding: 0.5rem 1.1rem;
+  border: 2px solid var(--text-on-dark);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-on-dark);
+  font-weight: 700;
+  cursor: pointer;
+}
+.car-search-close:hover, .car-search-close:focus-visible { border-color: var(--gold); color: var(--gold); }
+.car-search-input {
+  display: block;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 12px;
+  background: var(--surface-dark-alt);
+  color: var(--text-on-dark);
+}
+.car-search-input::placeholder { color: var(--text-on-dark-nav); }
+.car-search-count { margin: 0.6rem 0 0; color: var(--text-on-dark-soft); font-size: 0.9rem; }
+.car-search-results { display: grid; gap: 0.6rem; margin-top: 0.6rem; max-height: 60vh; overflow-y: auto; }
+.car-search-group { display: grid; gap: 0.5rem; }
+.car-search-group-title {
+  margin: 0.2rem 0 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--gold);
+}
+.car-search-option {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+  min-height: 48px;
+  padding: 0.5rem;
+  border: 1px solid var(--line-on-dark);
+  border-radius: 12px;
+  background: var(--surface-dark-alt);
+  color: var(--text-on-dark);
+  text-decoration: none;
+}
+.car-search-option:hover, .car-search-option:focus-visible, .car-search-option.is-active { border-color: var(--gold); }
+.car-search-thumb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 54px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--always-dark);
+}
+.car-search-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.car-search-thumb svg { width: 60px; height: 26px; color: var(--gold); }
+.car-search-info { display: grid; gap: 0.15rem; min-width: 0; }
+.car-search-name { font-weight: 700; color: var(--text-on-dark); }
+.car-search-meta { color: var(--text-on-dark-soft); font-size: 0.9rem; }
+.car-search-status { color: var(--gold); font-size: 0.85rem; font-weight: 700; }
+.car-search-empty { padding: 0.6rem 0; color: var(--text-on-dark-soft); }
+.car-search-empty a { color: var(--gold); font-weight: 700; }
+.car-search-see-all { margin: 0.8rem 0 0; }
+.car-search-see-all a { color: var(--gold); font-weight: 700; }
+
+/* The car opened from a search result on index.html (outline uses the 3:1 focus colour). */
+.car-card.is-highlighted { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+.hero-bg { background-position: center 72%; }
+.sales-hero .hero-inner { min-height: 540px; align-content: center; }

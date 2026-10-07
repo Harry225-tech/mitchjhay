@@ -1,0 +1,17 @@
+﻿# OS and editor files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local environment files
+.env
+.env.*
+
+# Logs and cache
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.swp
+*~
